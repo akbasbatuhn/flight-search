@@ -63,7 +63,7 @@ public class AirportController {
             )
     })
     @PostMapping
-    public ResponseEntity<AirportDTO> createFlight(@Valid @RequestBody AirportRequestDTO airportRequestDTO) {
+    public ResponseEntity<AirportDTO> createAirport(@Valid @RequestBody AirportRequestDTO airportRequestDTO) {
         AirportDTO airportDTO = service.createAirport(airportRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(airportDTO);
     }
