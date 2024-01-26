@@ -74,6 +74,7 @@ public class AirportService {
 
     @Transactional
     public void deleteAirportById(Long id) {
+        findAirportById(id);
         repository.deleteById(id);
     }
 }
