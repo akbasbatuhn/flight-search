@@ -47,6 +47,19 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponseDTO> handleResourceAlreadyExistException(
+            IllegalArgumentException exception, WebRequest request) {
+        ErrorResponseDTO errorResponse = ErrorResponseDTO.builder()
+                .errorCode(HttpStatus.BAD_REQUEST)
+                .errorMessage(exception.getMessage())
+                .apiPath(request.getDescription(false))
+                .errorTimestamp(LocalDateTime.now())
+                .build();
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatusCode status, WebRequest request
