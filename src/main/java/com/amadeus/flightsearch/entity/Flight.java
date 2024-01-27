@@ -1,6 +1,5 @@
 package com.amadeus.flightsearch.entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,7 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,11 +33,11 @@ public class Flight extends BaseEntity {
     @Column(name = "flight_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "departure_airport_id")
     private Airport departureAirport;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "destination_airport_id")
     private Airport destinationAirport;
 

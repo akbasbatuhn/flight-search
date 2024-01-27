@@ -90,6 +90,7 @@ public class FlightService {
         );
     }
 
+    @Transactional
     public FlightDTO updateFlight(Long id, FlightRequestDTO flightRequestDTO) {
         Flight flight = findFlightById(id);
 
@@ -103,9 +104,15 @@ public class FlightService {
         return FlightDTOConverter.flightToFlightDTOConverter(newFlight);
     }
 
+    @Transactional
     public void deleteFlightById(Long id) {
         findFlightById(id);
         flightRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void saveAllFlights(List<Flight> mockData) {
+        flightRepository.saveAll(mockData);
     }
 
     public List<FlightSearchDTO> findExactFlights(
@@ -196,8 +203,6 @@ public class FlightService {
         // Start of day
         LocalDateTime departureStartDateTime = LocalDateTime.of(targetDate, LocalTime.MIN);
         LocalDateTime departureEndDateTime = LocalDateTime.of(targetDate, targetTime);
-        System.out.println(departureStartDateTime + " departure start time");
-        System.out.println(departureEndDateTime);
 
         targetDate = returnDate.toLocalDate();
         targetTime = returnDate.toLocalTime();
@@ -205,8 +210,6 @@ public class FlightService {
         // Start of day
         LocalDateTime destinationStartDateTime = LocalDateTime.of(targetDate, LocalTime.MIN);
         LocalDateTime destinationEndDateTime = LocalDateTime.of(targetDate, targetTime);
-        System.out.println(destinationStartDateTime + " destination start time");
-        System.out.println(departureEndDateTime);
 
         List<Flight> departureResultList =
                 flightRepository.findByDepartureAirportAndDestinationAirportAndDepartureDateBetweenAndDepartureDateIsNotNullAndReturnDateBetweenAndReturnDateIsNotNull(
@@ -227,12 +230,6 @@ public class FlightService {
                 result.add(second);
             }
         }
-        /*
-        List<Flight> destinationResultList =
-                flightRepository.findByDepartureAirportAndDestinationAirportAndDepartureDateBetweenAndReturnDateBetween(
-                        destinationAirport, departureAirport, destinationStartDateTime, destinationEndDateTime, destinationStartDateTime, destinationEndDateTime);
-
-        departureResultList.addAll(destinationResultList);*/
         return result;
     }
 }
