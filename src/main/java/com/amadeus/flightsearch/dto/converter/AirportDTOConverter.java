@@ -3,7 +3,6 @@ package com.amadeus.flightsearch.dto.converter;
 import com.amadeus.flightsearch.dto.AirportDTO;
 import com.amadeus.flightsearch.entity.Airport;
 
-//@Component
 public class AirportDTOConverter {
 
     private AirportDTOConverter() {}
