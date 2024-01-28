@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "b1794236-dad5-4102-a069-3e4f69d6f8a5",
+		"name": "Flight Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20766948"
+	},
+	"item": [
+		{
+			"name": "Airport",
+			"item": [
+				{
+					"name": "Create Airport",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "password",
+								"username": "user"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"city\": \"İzmir\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/airports"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Airports",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "password",
+								"username": "user"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/airports"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Airports Paged",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "password",
+								"username": "user"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/airports/paged?pageNumber=0&pageSize=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"airports",
+								"paged"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Airport Detail by ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "password",
+								"username": "user"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/airports/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Airport Detail",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "password",
+								"username": "user"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"city\": \"İstanbul\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/airports/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Airport by ID",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "password",
+								"username": "user"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/airports/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flight",
+			"item": [
+				{
+					"name": "Search",
+					"item": [
+						{
+							"name": "Search One Way Flights (Exact time)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "password",
+										"username": "user"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search-flight/exact?departureAirportId=1&destinationAirportId=2&departureDate=2024-11-12T23:00:00",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search-flight",
+										"exact"
+									],
+									"query": [
+										{
+											"key": "departureAirportId",
+											"value": "1"
+										},
+										{
+											"key": "destinationAirportId",
+											"value": "2"
+										},
+										{
+											"key": "departureDate",
+											"value": "2024-11-12T23:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search Round Trip Flights (Exact Time)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search-flight/exact?departureAirportId=2&destinationAirportId=1&departureDate=2024-11-11T07:59:00&returnDate=2024-11-12T07:59:00",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search-flight",
+										"exact"
+									],
+									"query": [
+										{
+											"key": "departureAirportId",
+											"value": "2"
+										},
+										{
+											"key": "destinationAirportId",
+											"value": "1"
+										},
+										{
+											"key": "departureDate",
+											"value": "2024-11-11T07:59:00"
+										},
+										{
+											"key": "returnDate",
+											"value": "2024-11-12T07:59:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search Flights",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "password",
+										"username": "user"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search-flight?departureAirportId=1&destinationAirportId=2&departureDate=2024-10-10T15:00:00&returnDate=2024-11-11T12:00:00",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search-flight"
+									],
+									"query": [
+										{
+											"key": "departureAirportId",
+											"value": "1"
+										},
+										{
+											"key": "destinationAirportId",
+											"value": "2"
+										},
+										{
+											"key": "departureDate",
+											"value": "2024-10-10T15:00:00"
+										},
+										{
+											"key": "returnDate",
+											"value": "2024-11-11T12:00:00"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search One Way",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search-flight?departureAirportId=1&destinationAirportId=2&departureDate=2024-02-08T18:39:00",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search-flight"
+									],
+									"query": [
+										{
+											"key": "departureAirportId",
+											"value": "1"
+										},
+										{
+											"key": "destinationAirportId",
+											"value": "2"
+										},
+										{
+											"key": "departureDate",
+											"value": "2024-02-08T18:39:00"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create Flight",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "password",
+								"username": "user"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"departureAirportId\": 1,\n    \"destinationAirportId\": 2,\n    \"departureDate\": \"2024-11-11T22:00:00\",\n    \"returnDate\": \"2024-11-12T22:00:00\",\n    \"price\": 1907\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/flights"
+					},
+					"response": []
+				},
+				{
+					"name": "Create One Way Flight",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"departureAirportId\": 2,\n    \"destinationAirportId\": 1,\n    \"departureDate\": \"2024-11-11T07:59:00.000\",\n    \"price\": 1907\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/flights"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Flights",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/flights"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Flights Paged",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/flights/paged?pageNumber=0&pageSize=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flights",
+								"paged"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Flight Detail by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/flights/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Flight Detail",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"departureAirportId\": 3,\n    \"destinationAirportId\": 1,\n    \"departureDate\": \"2024-11-11T07:59:00.000\",\n    \"returnDate\": \"2024-11-20T07:59:00.000\",\n    \"price\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/v1/flights/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Flight by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/flights/2"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
