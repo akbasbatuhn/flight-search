@@ -15,6 +15,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,10 +37,12 @@ public class Flight extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "departure_airport_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Airport departureAirport;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "destination_airport_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Airport destinationAirport;
 
     private LocalDateTime departureDate;

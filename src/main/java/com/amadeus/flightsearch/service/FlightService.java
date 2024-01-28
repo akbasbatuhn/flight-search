@@ -86,7 +86,7 @@ public class FlightService {
 
     protected Flight findFlightById(Long id) {
         return flightRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Flight", "airportId", String.valueOf(id))
+                () -> new ResourceNotFoundException("Flight", "id", String.valueOf(id))
         );
     }
 
@@ -145,7 +145,7 @@ public class FlightService {
         }
 
         if(flights.isEmpty())
-            throw new ResourceNotFoundException("Flight not found with given date");
+            throw new ResourceNotFoundException("Flight not found with given data");
 
         return flights.stream().map(FlightDTOConverter::flightToFlightSearchDTOConverter).toList();
     }

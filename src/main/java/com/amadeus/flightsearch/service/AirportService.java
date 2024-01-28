@@ -59,12 +59,14 @@ public class AirportService {
 
     protected Airport findAirportById(Long id) {
         return repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Airport", "airportId", String.valueOf(id))
+                () -> new ResourceNotFoundException("Airport", "id", String.valueOf(id))
         );
     }
 
     @Transactional
     public AirportDTO updateAirportDetails(Long airportId, AirportRequestDTO airportRequestDTO) {
+        isCityExist(airportRequestDTO.getCity());
+
         Airport airport = findAirportById(airportId);
         airport.setCity(airportRequestDTO.getCity());
         repository.save(airport);
