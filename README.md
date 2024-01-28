@@ -76,3 +76,9 @@ You can access H2 database console on [this](http://localhost:8080/h2-console) l
 ```
 http://localhost:8080/h2-console
 ```
+
+You can enter h2-console with these credentials
+```
+Username: sa
+Password: ''(Empty)
+```
