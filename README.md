@@ -1,7 +1,7 @@
 # Flight Search
 
 Sections
-  - [Installation](#run--build)
+  - [Installation](#installation--run)
   - [Used Technologies](#used-technologies)
   - [Notes](#notes)
   - [Related Links](#links)
