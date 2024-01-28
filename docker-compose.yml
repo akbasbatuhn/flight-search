@@ -1,0 +1,6 @@
+services:
+  flight-search:
+    image: "batuhanakbas/flight-search:latest"
+    container_name: flight-search-app
+    ports:
+      - "8080:8080"
