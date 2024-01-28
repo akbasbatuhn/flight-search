@@ -7,6 +7,8 @@ import com.amadeus.flightsearch.exception.ResourceAlreadyExistException;
 import com.amadeus.flightsearch.exception.ResourceNotFoundException;
 import com.amadeus.flightsearch.dto.converter.AirportDTOConverter;
 import com.amadeus.flightsearch.repository.AirportRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class AirportService {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(AirportService.class);
 
     private final AirportRepository repository;
 
@@ -33,6 +37,7 @@ public class AirportService {
                 .city(airportRequestDTO.getCity()).build();
 
         Airport newAirport = repository.save(airport);
+        LOGGER.info("New Airport created with id: {}", newAirport.getId());
 
         return AirportDTOConverter.airportToAirportDTO(newAirport);
     }
@@ -71,6 +76,7 @@ public class AirportService {
         airport.setCity(airportRequestDTO.getCity());
         repository.save(airport);
 
+        LOGGER.info("Airport details updated with id: {}", airport.getId());
         return AirportDTOConverter.airportToAirportDTO(airport);
     }
 
@@ -78,5 +84,6 @@ public class AirportService {
     public void deleteAirportById(Long id) {
         findAirportById(id);
         repository.deleteById(id);
+        LOGGER.info("Airport deleted  with id: {}", id);
     }
 }

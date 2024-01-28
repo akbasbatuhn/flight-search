@@ -9,6 +9,8 @@ import com.amadeus.flightsearch.entity.Flight;
 import com.amadeus.flightsearch.exception.ResourceNotFoundException;
 import com.amadeus.flightsearch.repository.FlightRepository;
 import com.amadeus.flightsearch.util.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +26,8 @@ import java.util.List;
 
 @Service
 public class FlightService {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(FlightService.class);
 
     private final FlightRepository flightRepository;
     private final AirportService airportService;
@@ -45,6 +49,8 @@ public class FlightService {
                 .returnDate(flightRequestDTO.getReturnDate()).build();
 
         Flight newFlight = flightRepository.save(flight);
+
+        LOGGER.info("New Flight created with id: {}", newFlight.getId());
         return FlightDTOConverter.flightToFlightDTOConverter(newFlight);
     }
 
@@ -101,6 +107,8 @@ public class FlightService {
         flight.setDestinationAirport(airportService.findAirportById(flightRequestDTO.getDestinationAirportId()));
 
         Flight newFlight = flightRepository.save(flight);
+
+        LOGGER.info("Flight details updated with id: {}", newFlight.getId());
         return FlightDTOConverter.flightToFlightDTOConverter(newFlight);
     }
 
@@ -108,11 +116,13 @@ public class FlightService {
     public void deleteFlightById(Long id) {
         findFlightById(id);
         flightRepository.deleteById(id);
+        LOGGER.info("Flight deleted with id: {}", id);
     }
 
     @Transactional
     public void saveAllFlights(List<Flight> mockData) {
         flightRepository.saveAll(mockData);
+        LOGGER.info("Multiple Flights saved");
     }
 
     public List<FlightSearchDTO> findExactFlights(
