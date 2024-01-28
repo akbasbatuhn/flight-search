@@ -133,7 +133,7 @@ public class AirportController {
     @GetMapping("/{id}")
     public ResponseEntity<AirportDTO> getAirportById(@PathVariable Long id) {
         AirportDTO airportDTO = service.fetchAirportById(id);
-        return ResponseEntity.status(HttpStatus.FOUND).body(airportDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(airportDTO);
     }
 
     @Operation(
